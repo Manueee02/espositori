@@ -6,15 +6,16 @@ import { getDatabase } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAW-ub23KMLo9G6dToH9UFuay65Egt6Cv0",
-  authDomain: "espositori-b29a6.firebaseapp.com",
-  databaseURL: "https://espositori-b29a6-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "espositori-b29a6",
-  storageBucket: "espositori-b29a6.appspot.com",
-  messagingSenderId: "878167947338",
-  appId: "1:878167947338:web:11ce88dcb762a087314eb3",
-  measurementId: "G-EW6H7SD7MT"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  databaseURL: process.env.DATABASE_URL,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

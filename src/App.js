@@ -19,11 +19,6 @@ function App() {
             <link href='https://unpkg.com/css.gg@2.0.0/icons/css/notes.css' rel='stylesheet'/>
             <link href='https://unpkg.com/css.gg@2.0.0/icons/css/browse.css' rel='stylesheet'/>
             <link href='https://unpkg.com/css.gg@2.0.0/icons/css/add-r.css' rel='stylesheet'/>
-            
-            <h1>
-              Espositori Acilia Sud
-            </h1>
-          
             <BrowserRouter>
               <nav>
 
