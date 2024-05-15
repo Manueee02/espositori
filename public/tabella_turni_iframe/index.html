@@ -1,0 +1,548 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+<body>
+
+  <div class="root">
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        /*if (!document.cookie.match(/pageLoaded/)) {
+              // Se il cookie non esiste, imposta il cookie e ricarica la pagina
+              document.cookie = "pageLoaded=true";
+              location.reload();
+            }*/
+           
+
+
+
+ 
+      const rootElement = document.querySelector('.root')
+
+    const rows = [
+    
+    
+    
+
+
+      //////////////
+
+      
+      {
+          fratelli:["Taloni Rodolfo", "Erica Pieri", "Manuela Robibaro"],
+          giorno:"Martedì 2",
+          day:2, 
+          month:0,
+          orario:"9-12",
+          luogo:"Stazione di Acilia",
+          colore:"#BEBEBE",
+      },
+      
+      {
+          fratelli:["Littera Roberto", "D'Ario Laura", ""],
+          giorno:"Giovedì 4",
+          day:4, 
+          month:0,
+          orario:"9-12",
+          luogo:"Piazza di Acilia",
+          colore:"#BEBEBE",
+      },  
+      
+      {
+          fratelli:["Breci Paolo", "Silvia Pieri", "Oliveiro Vittoria"],
+          giorno:"Giovedì 4",
+          day:4, 
+          month:0,
+          orario:"15:30-18:30",
+          luogo:"Piazza di Acilia",
+          colore:"#BEBEBE",
+      }, 
+
+
+//////////////////
+
+
+ {
+          fratelli: ["Celio Alberto", "Del Pinto Anna", "Magnani Veruska"],
+          giorno:"Lunedì 8",
+          day:8,
+          month:0,
+          orario:"9-12",
+          luogo:"Stazione di Acilia",
+          colore:"#f8f8f8",
+          
+      },
+      
+      {
+          fratelli: ["Mainieri Michelangelo", "Vittoria Oliverio", "Concetta Storaci"],
+          giorno:"Lunedì 8",
+          day:8,
+          month:0,
+          orario:"12-15",
+          luogo:"Stazione di Acilia",
+          colore:"#f8f8f8",
+          
+      },
+      
+     
+      {
+          fratelli: ["Robibaro Alberto", "", "Anatolio Erika"],
+          giorno:"Lunedì 8",
+          day:8,
+          month:0,
+          orario:"15-18",
+          luogo:"Stazione di Acilia",
+          colore:"#f8f8f8",
+          
+      },
+      
+      {
+          fratelli: ["Aldo Romani", "", "Dolishnya Lyubov"],
+          giorno:"Martedì 9",
+          day:9,
+          month:0,
+          orario:"9-12",
+          luogo:"Stazione di Acilia",
+          colore:"#f8f8f8",
+          
+      },
+
+
+      {
+          fratelli:["Paolo Giannini", "Pontecorvi Daniela", "Moschetti Simona"],
+          giorno:"Giovedì 11",
+          day:11, 
+          month:0,
+          orario:"9-12",
+          luogo:"Piazza di Acilia",
+          colore:"#f8f8f8",
+      },
+      
+      {
+          fratelli:["Marco Giorgi", "Luisa Pitacco", "Tina Littera"],
+          giorno:"Giovedì 11",
+          day:11, 
+          month:0,
+          orario:"15:30-18:30",
+          luogo:"Piazza di Acilia",
+          colore:"#f8f8f8",
+      },
+      
+      {
+          fratelli:["Pieri Paolo", "Cantiello Mirko", "Cantiello Vanessa"],
+          giorno:"Sabato 13",
+          day:13, 
+          month:0,
+          orario:"9-12",
+          luogo:"Stazione di Acilia",
+          colore:"#f8f8f8",
+      },
+      
+      {
+          fratelli:["Giannini Gabriele", "Giorgi Marco", "Itri Massimo"],
+          giorno:"Sabato 13",
+          day:13, 
+          month:0,
+          orario:"15:30-18:30",
+          luogo:"Piazza di Acilia",
+          colore:"#f8f8f8",
+      },
+
+
+      ////////////////////////
+
+
+ {
+          fratelli: ["Littera Roberto", "Littera Tina", "Magnani Veruska"],
+          giorno:"Lunedì 15",
+          day:15,
+          month:0,
+          orario:"9-12",
+          luogo:"Stazione di Acilia",
+          colore:"#BEBEBE",
+          
+      },
+      
+      {
+          fratelli: ["Taraschi Alberto", "Breci Selena", "Anna del Pinto"],
+          giorno:"Lunedì 15",
+          day:15,
+          month:0,
+          orario:"12-15",
+          luogo:"Stazione di Acilia",
+          colore:"#BEBEBE",
+          
+      },
+      
+      {
+          fratelli: ["Alberto Robibaro", "Tonetti Claudio", "Anna Paola Appetiti"],
+          giorno:"Lunedì 15",
+          day:15,
+          month:0,
+          orario:"15-18",
+          luogo:"Stazione di Acilia",
+          colore:"#BEBEBE",
+          
+      },
+      
+      {
+          fratelli: ["Taloni Rodolfo", "Taloni Barbara", "D'Ario Laura"],
+          giorno:"Martedì 16",
+          day:16,
+          month:0,
+          orario:"9-12",
+          luogo:"Stazione di Acilia",
+          colore:"#BEBEBE",
+          
+      },
+
+
+      {
+          fratelli:["Rinaldi Pino", "Aldo Romani", "Pasquali Eleonora"],
+          giorno:"Giovedì 18",
+          day:18, 
+          month:0,
+          orario:"9-12",
+          luogo:"Piazza di Acilia",
+          colore:"#BEBEBE",
+      },
+      
+      {
+          fratelli:["Celio Alberto", "Ganci Nadia", "Giannini Federica"],
+          giorno:"Giovedì 18",
+          day:18, 
+          month:0,
+          orario:"15:30-18:30",
+          luogo:"Piazza di Acilia",
+          colore:"#BEBEBE",
+      },
+
+
+      ////////////////////////
+
+
+ {
+          fratelli: ["Giannini Paolo", "Del Pinto Anna", "Selena Breci"],
+          giorno:"Lunedì 22",
+          day:22,
+          month:0,
+          orario:"9-12",
+          luogo:"Stazione di Acilia",
+          colore:"#f8f8f8",
+          
+      },
+      
+      {
+          fratelli: ["Celio Alberto", "Erica Pieri", "Rinaldi Paola"],
+          giorno:"Lunedì 22",
+          day:22,
+          month:0,
+          orario:"12-15",
+          luogo:"Stazione di Acilia",
+          colore:"#f8f8f8",
+          
+      },
+      
+      {
+          fratelli: ["Mainieri Michelangelo", "Oliveiro Vittoria", "Anatolio Erika"],
+          giorno:"Lunedì 22",
+          day:22,
+          month:0,
+          orario:"15-18",
+          luogo:"Stazione di Acilia",
+          colore:"#f8f8f8",
+          
+      },
+      
+      {
+          fratelli: ["Giannini Paolo", "Mainieri Mariateresa", "Taloni Barbara"],
+          giorno:"Martedì 23",
+          day:23,
+          month:0,
+          orario:"9-12",
+          luogo:"Stazione di Acilia",
+          colore:"#f8f8f8",
+          
+      },
+
+
+      {
+          fratelli:["Aldo Romani", "Pontecorvi Daniela", "Magnani Veruska"],
+          giorno:"Giovedì 25",
+          day:25, 
+          month:0,
+          orario:"9-12",
+          luogo:"Piazza di Acilia",
+          colore:"#f8f8f8",
+      },
+      
+      {
+          fratelli:["Breci Paolo", "Concetta Storaci", "Silvia Pieri"],
+          giorno:"Giovedì 25",
+          day:25, 
+          month:0,
+          orario:"15:30-18:30",
+          luogo:"Piazza di Acilia",
+          colore:"#f8f8f8",
+      },
+      
+      {
+          fratelli:["Gabriele Giannini", "Laura D'Ario", "Lodoli Rita"],
+          giorno:"Sabato 27",
+          day:27, 
+          month:0,
+          orario:"9-12",
+          luogo:"Stazione di Acilia",
+          colore:"#f8f8f8",
+      },
+      
+      {
+          fratelli:["Moschetti Stefano", "Moschetti Simona", ""],
+          giorno:"Sabato 27",
+          day:27, 
+          month:0,
+          orario:"15:30-18:30",
+          luogo:"Piazza di Acilia",
+          colore:"#f8f8f8",
+      },
+
+
+      ////////////////////////
+
+
+ 
+
+      {
+          fratelli:["Littera Roberto", "Breci Selena", ""],
+          giorno:"Lunedì 29",
+          day:29, 
+          month:0,
+          orario:"9-12",
+          luogo:"Piazza di Acilia",
+          colore:"#BEBEBE",
+      },
+      
+      {
+          fratelli:["Robibaro Alberto", "Robibaro Manuela", "Storaci Concetta"],
+          giorno:"Lunedì 29",
+          day:29, 
+          month:0,
+          orario:"12-15",
+          luogo:"Stazione di Acilia",
+          colore:"#BEBEBE",
+      },
+      
+      {
+          fratelli:["Tonetti Claudio", "Moschetti Nicole", "Anatolio Erika"],
+          giorno:"Lunedì 29",
+          day:29, 
+          month:0,
+          orario:"15-18",
+          luogo:"Stazione di Acilia",
+          colore:"#BEBEBE",
+      },
+      
+      {
+          fratelli:["Taloni Rodolfo", "Silvia Pieri", "Dolishnya Lyubov"],
+          giorno:"Martedì 30",
+          day:30, 
+          month:0,
+          orario:"9-12",
+          luogo:"Piazza di Acilia",
+          colore:"#BEBEBE",
+      },
+  
+  
+      /////////////////////////////
+      
+      ]
+    const data = new Date()
+
+    const colore1 = "grey"
+    const Tabella_Turni = (
+
+    <div>
+      <table>
+        <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">In turno</th>
+                  <th scope="col">Orario</th>
+                  <th scope="col">Luogo</th>
+                </tr>
+              </thead>
+              <tbody id="test1" class="col-sm-4 box">
+                {
+                    
+                    rows.map((row) =>{
+                  if(row.month == data.getMonth()){
+                    if(row.day>=(data.getUTCDate())){
+                    return <tr style={{backgroundColor: row.colore}}>
+                              <td scope="row" data-label="Data">{row.giorno}</td>
+                              <td data-label="In turno">{row.fratelli[0]}<br/>{row.fratelli[1]}<br/>{row.fratelli[2]}</td>
+                              <td data-label="Orario">{row.orario}</td>
+                              <td data-label="Luogo">{row.luogo}</td>
+	                          </tr>
+                  }
+                  }
+                  else{
+                    if(row.month >= data.getMonth()){
+                    return <tr style={{backgroundColor: row.colore}}>
+                              <td scope="row" data-label="Data">{row.giorno}</td>
+                              <td data-label="In turno">{row.fratelli[0]}<br/>{row.fratelli[1]}<br/>{row.fratelli[2]}</td>
+                              <td data-label="Orario">{row.orario}</td><td data-label="Luogo">{row.luogo}</td>
+                           </tr>
+                    }
+                    else{}
+                  }
+                })}
+              </tbody>
+      </table>
+    </div>
+)
+
+
+
+      // our code goes here
+      const app = (
+        
+        <div>
+          {Tabella_Turni}
+        </div>
+      )
+
+      ReactDOM.render(app, rootElement)
+    </script>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <style>
+        
+
+
+    table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+    }
+
+    table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+    }
+
+    table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+    }
+
+    table th,
+    table td {
+    padding: .625em;
+    text-align: center;
+    
+    }
+
+    table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    }
+
+    @media screen and (max-width: 600px) {
+    table {
+        border: 0;
+    }
+
+    table caption {
+        font-size: 1.3em;
+    }
+    
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    
+    table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+    
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+    
+    table td::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    
+    table td:last-child {
+        border-bottom: 0;
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* general styling */
+    body {
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.25;
+    }
+</style>
+</body>
+</html>
