@@ -1,49 +1,20 @@
-import { useEffect, useState } from 'react';
-import { db } from "./firebase";
+import React, { useEffect, useState } from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
 import { ref, get } from "firebase/database";
+import { db } from "./firebase";
 
-export default function TabellaVirtuale() {
+function TabellaVirtuale() {
   const [turni, setTurni] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  /*
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/api/data');
-        setData(response.data);
-        
-      } catch (error) {
-        console.error('Errore nel recupero dei dati:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  console.log(data)
-
- 
-    // altezza dell'iframe in base alla pagina web
-
- const iframeRef = useRef(null);
-  useEffect(() => {const iframe = iframeRef.current;
-    iframe.style.height = '0px'; 
-
-    // imposta l'altezza iniziale dell'iframe a 0
-    const updateHeight = () => {
-    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-    const height = iframeDoc.documentElement.scrollHeight;
-
-    iframe.style.height = height + 'px';};
-    iframe.onload = updateHeight; // aggiorna l'altezza quando la pagina è caricata    
-    window.addEventListener('resize', updateHeight); // aggiorna l'altezza quando la finestra cambia dimensione    
-    return () => window.removeEventListener('resize', updateHeight); 
-    
-    // rimuovi l'ascoltatore quando il componente viene smontato  
-  }, []);*/
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const query = ref(db, "Turni");
@@ -74,61 +45,73 @@ export default function TabellaVirtuale() {
     getData();
   }, []);
 
-  const data = new Date();
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredTurni = turni.filter((turno) => {
+    const fratelli = [turno.fratello1, turno.fratello2, turno.fratello3];
+    return fratelli.some((fratello) =>
+      fratello.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
 
   return (
     <div>
-      {loading ? (
-        // Loader mentre i dati vengono caricati
-        <div><div class="loader book">
-          <figure class="page"></figure>
-          <figure class="page"></figure>
-          <figure class="page"></figure>
-        </div>
-      
-      <h2>Loading</h2></div>
-      ) : (
-        // Tabella dei turni
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">Data</th>
-              <th scope="col">In turno</th>
-              <th scope="col">Orario</th>
-              <th scope="col">Luogo</th>
-            </tr>
-          </thead>
-          <tbody>
-            {turni.map((turno) => {
-                if (turno && turno.data) {
-                  const dataTurno = turno.data.split('/');
-                  const [giorno, mese, anno] = dataTurno.map(Number);
-                  if (!isNaN(giorno) && !isNaN(mese) && !isNaN(anno)) {
-                    const dataTurnoObj = new Date(anno, mese - 1, giorno);
-                    const dataIeri = new Date();
-                    dataIeri.setDate(dataIeri.getDate() - 1); // Ottieni la data di ieri
-                    
-                    if (dataTurnoObj >= dataIeri) { // Confronta con la data di ieri
-                      return (
-                        <tr style={{ backgroundColor: turno.colore }} key={turno.id}>
-                          <td scope="row" data-label="Data">{turno.giorno}</td>
-                          <td data-label="In turno">{turno.fratello1}<br />{turno.fratello2}<br />{turno.fratello3}</td>
-                          <td data-label="Orario">{turno.orario}</td>
-                          <td data-label="Luogo">{turno.luogo}</td>
-                        </tr>
-                      );
-                    }
-                  } else {
-                    console.error('Formato data non valido:', turno.data);
+      <Paper
+        component="form"
+        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, margin: '0 auto', marginBottom: '20px' }}
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="Cerca fratello"
+          inputProps={{ 'aria-label': 'cerca fratello' }}
+          onChange={handleSearchChange}
+        />
+        <SearchIcon sx={{ mr: 1 }} />
+      </Paper>
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Data</TableCell>
+              <TableCell>In turno</TableCell>
+              <TableCell>Orario</TableCell>
+              <TableCell>Luogo</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredTurni.map((turno) => {
+              if (turno && turno.data) {
+                const dataTurno = turno.data.split('/');
+                const [giorno, mese, anno] = dataTurno.map(Number);
+                if (!isNaN(giorno) && !isNaN(mese) && !isNaN(anno)) {
+                  const dataTurnoObj = new Date(anno, mese - 1, giorno);
+                  const dataIeri = new Date();
+                  dataIeri.setDate(dataIeri.getDate() - 1); // Ottieni la data di ieri
+
+                  if (dataTurnoObj >= dataIeri) { // Confronta con la data di ieri
+                    return (
+                      <TableRow style={{ /*backgroundColor: turno.colore*/ }} key={turno.id}>
+                        <TableCell align="top">{turno.giorno}</TableCell>
+                        <TableCell align="top">{turno.fratello1}<br />{turno.fratello2}<br />{turno.fratello3}</TableCell>
+                        <TableCell align="top">{turno.orario}</TableCell>
+                        <TableCell align="top">{turno.luogo}</TableCell>
+                      </TableRow>
+                    );
                   }
                 } else {
-                  console.error('Turno non definito o mancante la proprietà data:', turno);
+                  console.error('Formato data non valido:', turno.data);
                 }
-              })
-            }
-          </tbody>
-        </table>
-      )}
+              } else {
+                console.error('Turno non definito o mancante la proprietà data:', turno);
+              }
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
+
+export default TabellaVirtuale;
