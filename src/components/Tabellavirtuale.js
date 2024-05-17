@@ -8,13 +8,19 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
+import { Fab, Dialog } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { Contattaci } from './Contattaci';
 import { ref, get } from "firebase/database";
 import { db } from "./firebase";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function TabellaVirtuale() {
   const [turni, setTurni] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     const query = ref(db, "Turni");
@@ -49,6 +55,25 @@ function TabellaVirtuale() {
     setSearchTerm(event.target.value);
   };
 
+  const highlightText = (text, highlight) => {
+    if (!highlight.trim()) {
+      return text;
+    }
+    const regex = new RegExp(`(${highlight})`, 'gi');
+    const parts = text.split(regex);
+    return (
+      <>
+        {parts.map((part, index) =>
+          regex.test(part) ? (
+            <span key={index} style={{ backgroundColor: 'yellow'}}>{part}</span>
+          ) : (
+            part
+          )
+        )}
+      </>
+    );
+  };
+
   const filteredTurni = turni.filter((turno) => {
     const fratelli = [turno.fratello1, turno.fratello2, turno.fratello3];
     return fratelli.some((fratello) =>
@@ -56,16 +81,24 @@ function TabellaVirtuale() {
     );
   });
 
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
   return (
     <div>
       <Paper
         component="form"
-        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, margin: '0 auto', marginBottom: '20px' }}
+        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center',  margin: '0 auto', marginBottom: '20px' }}
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder="Cerca fratello"
-          inputProps={{ 'aria-label': 'cerca fratello' }}
+          placeholder="Cerca"
+          inputProps={{ 'aria-label': 'cerca' }}
           onChange={handleSearchChange}
         />
         <SearchIcon sx={{ mr: 1 }} />
@@ -94,7 +127,11 @@ function TabellaVirtuale() {
                     return (
                       <TableRow style={{ /*backgroundColor: turno.colore*/ }} key={turno.id}>
                         <TableCell align="top">{turno.giorno}</TableCell>
-                        <TableCell align="top">{turno.fratello1}<br />{turno.fratello2}<br />{turno.fratello3}</TableCell>
+                        <TableCell align="top">
+                          {highlightText(turno.fratello1, searchTerm)}<br />
+                          {highlightText(turno.fratello2, searchTerm)}<br />
+                          {highlightText(turno.fratello3, searchTerm)}
+                        </TableCell>
                         <TableCell align="top">{turno.orario}</TableCell>
                         <TableCell align="top">{turno.luogo}</TableCell>
                       </TableRow>
@@ -110,6 +147,24 @@ function TabellaVirtuale() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Fab
+        color="primary"
+        aria-label="add"
+        sx={{
+          position: 'fixed',
+          bottom: 16,
+          right: 16,
+        }}
+        onClick={handleOpenDialog}
+      >
+        <AddIcon />
+      </Fab>
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <div>
+          <ToastContainer handleCloseDialog={handleCloseDialog}/>
+          <Contattaci />
+      </div>
+      </Dialog>
     </div>
   );
 }

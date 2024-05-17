@@ -1,318 +1,184 @@
 import React from 'react';
 import emailjs from "emailjs-com";
-// npm install emailjs-com
-// npm install react-toastify
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
-
-// classe ES6 per definire un componente
 class Contattaci extends React.Component {
-
-    
-
     constructor(props) {
-      super(props);
-      this.state = {
-        n_opuscoli:'',
-        n_puoi_vivere:'',
-        n_libri:'',
-        n_riviste:'',
-        n_biglietti:'',
-        n_volantini:'',
-        n_video:'',
-        note_lingue:'',
-        data: '',
-      };
-  
-      // Necessario per accedere al corretto valore di this all'interno della callback
-      this.handleInputChange = this.handleInputChange.bind(
-        this
-      );
-
-      
-    }
-  
+        super(props);
+        this.state = {
+          n_opuscoli: '',
+          n_puoi_vivere: '',
+          n_libri: '',
+          n_riviste: '',
+          n_biglietti: '',
+          n_volantini: '',
+          n_video: '',
+          note_lingue: '',
+          data: '',
+        };
     
-    handleInputChange(event) {
-      const target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
-      const name = target.name;
-      // senza la bind this potrebbe essere undefined
-      this.setState({
-        [name]: value
-      });
-    }
-
-  inviaEmail(e) {
-     // preventDefault annulla l'evento di default
-      e.preventDefault();
-      
-      /*emailjs.sendForm('service_espositori', 'template_v61egh9', e.target, 'DVR6NlCr-hzT7HZsK')
-             .then((result) => {
-                toast.success("Email inviata con successo");
-                console.log(result.text);
-             }, (error) => {
-                toast.error("Invio Email non riuscito");
-                console.log(error.text);
-             });*/
-
-             
-
-      // reset degli input del form contattaci
-      emailjs.sendForm('service_espositori', 'template_v61egh9', e.target, 'DVR6NlCr-hzT7HZsK')
-             .then((result) => {
-                alert('Rapporto inviato con successo, grazie mille.')
-             }, (error) => {
-                alert("Errore nell'invio.")
-             });
-        
-      e.target.reset();
-
-      var vis = 1000;
-
-    //ALERT
-    window.alert = function (message) {
-    //Creazione dell'elemento
-      var a = document.createElement('div');
-      //regole di stile CSS
-      a.style.cssText = "width:20rem; height:4rem; border:1px solid #bbb; border-radius:5px; padding:10px; background:white; box-shadow:0px 0px 8px #0006; position:fixed; top:0px; right:0; left:0; bottom: 10rem; margin:auto; font-family: \"Arial\", sans-serif; color:black; text-align:center; z-index:"+ vis+ ";";
-
-      a.innerHTML = "<b>"+message+'</b><i class="gg-chevron-down-o" style="margin-top:1rem; left:46%; right:50%;"></i>';
-      document.body.appendChild(a);
-
-      vis--;
-
-      //Rimozione dell'elemento al click
-      a.addEventListener("click", function() {
-        a.remove();
-        }
-      )
-    };
-
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.inviaEmail = this.inviaEmail.bind(this);
+      }
     
-  }
-  
-  
-  //
-  
-    render() {
+      handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        this.setState({
+          [name]: value
+        });
+      }
+    
+      inviaEmail(e) {
+        e.preventDefault();
+    
+        emailjs.sendForm('service_espositori', 'template_v61egh9', e.target, 'DVR6NlCr-hzT7HZsK')
+          .then((result) => {
+            toast.success('Rapporto inviato con successo, grazie mille.');
 
-      return (
+          })
+          .catch((error) => {
+            toast.error("Errore nell'invio.");
+          });
+    
+        e.target.reset();
+      }
+
+  render() {
+    return (
+      <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={this.inviaEmail}
+        style={{padding: "1rem", width:"20rem"}}
+      >
         
-        <div id="form">
-            <link href='https://unpkg.com/css.gg@2.0.0/icons/css/chevron-down-o.css' rel='stylesheet'></link>
-            
-            <p id="titolo"><b>Inserire qui le pubblicazioni lasciate durante il turno e cliccare invia.</b></p>
-            <form name="frmEmail" method="post" action="?send=1" onSubmit={this.inviaEmail}>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 100 }} size="small" aria-label="a dense table">
-                        <TableHead>
-                        </TableHead>
-                        <TableBody>
+        <TextField
+        fullWidth
+        variant="outlined"
+        type="number"
+        name="n_puoi_vivere"
+        label="Puoi vivere felice per sempre"
+        value={this.state.n_puoi_vivere}
+        onChange={this.handleInputChange}
+        InputProps={{ inputProps: { min: 0 } }}
+        sx={{
+            m: 1
+          }}
+        style={{width:"100%"}}
+        />
 
-                        <TableRow  className="table" id="puoi_vivere">
-                                <TableCell>
-                                    Puoi vivere felice per sempre (Opuscolo)
-                                </TableCell>
-                                
-                                <TableCell align="right" className='cella_select'>
-                                    <select name="n_puoi_vivere" placeholder="Selezionare numero" checked={this.state.n_opuscoli}
-                                        onChange={this.handleInputChange}>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                    </select>
-                                </TableCell>
-                            </TableRow>
+        <TextField
+        fullWidth
+        variant="outlined"
+        type="number"
+        name="n_opuscoli"
+        label="Opuscoli"
+        value={this.state.n_opuscoli}
+        onChange={this.handleInputChange}
+        InputProps={{ inputProps: { min: 0 } }}
+        sx={{ m: 1 }}
+        style={{width:"100%"}}
+        />
 
-                        
+        <TextField
+        fullWidth
+        variant="outlined"
+        type="number"
+        name="n_libri"
+        label="Libri"
+        value={this.state.n_libri}
+        onChange={this.handleInputChange}
+        InputProps={{ inputProps: { min: 0 } }}
+        sx={{ m: 1 }}
+        style={{width:"100%"}}
+        />
 
-                            
+        <TextField
+        fullWidth
+        variant="outlined"
+        type="number"
+        name="n_riviste"
+        label="Riviste"
+        value={this.state.n_riviste}
+        onChange={this.handleInputChange}
+        InputProps={{ inputProps: { min: 0 } }}
+        sx={{ m: 1 }}
+        style={{width:"100%"}}
+        />
 
-                            <TableRow  className="table">
-                                <TableCell>
-                                    Opuscoli
-                                </TableCell>
-                                <TableCell align="right">
-                                    <select name="n_opuscoli" placeholder="Selezionare numero" checked={this.state.n_opuscoli}
-                                        onChange={this.handleInputChange}>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                    </select>
-                                </TableCell>
-                            </TableRow>
+        <TextField
+        fullWidth
+        variant="outlined"
+        type="number"
+        name="n_biglietti"
+        label="Biglietti da visita"
+        value={this.state.n_biglietti}
+        onChange={this.handleInputChange}
+        InputProps={{ inputProps: { min: 0 } }}
+        sx={{ m: 1 }}
+        style={{width:"100%"}}
+        />
 
-                            <TableRow  className="table">
-                                <TableCell>
-                                    Libri
-                                </TableCell>
-                                <TableCell align="right">
-                                    <select name="n_libri" placeholder="Selezionare numero" checked={this.state.n_libri}
-                                        onChange={this.handleInputChange}>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                    </select>
-                                </TableCell>
-                            </TableRow>
+        <TextField
+        fullWidth
+        variant="outlined"
+        type="number"
+        name="n_video"
+        label="Video mostrati"
+        value={this.state.n_video}
+        onChange={this.handleInputChange}
+        InputProps={{ inputProps: { min: 0 } }}
+        sx={{ m: 1 }}
+        style={{width:"100%"}}
+        />
 
-                            <TableRow>
-                                <TableCell>
-                                    Riviste
-                                </TableCell>
-                                <TableCell align="right">
-                                    <select name="n_riviste" placeholder="Selezionare numero" checked={this.state.n_riviste}
-                                            onChange={this.handleInputChange}>
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                    </select>  
-                                </TableCell>
-                            </TableRow>
 
-                            <TableRow>
-                                <TableCell>
-                                    Biglietti da visita
-                                </TableCell>
-                                <TableCell align="right">
-                                    <select name="n_biglietti" placeholder="Selezionare numero" checked={this.state.n_biglietti}
-                                        onChange={this.handleInputChange}>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                    </select>
-                                </TableCell>
-                            </TableRow>
+        <TextField
+          fullWidth
+          variant="outlined"
+          id="note_lingue"
+          name="note_lingue"
+          label="Scrivere qui le pubblicazioni date in lingua e la lingua"
+          value={this.state.note_lingue}
+          onChange={this.handleInputChange}
+          sx={{ m: 1 }}
+          style={{width:"100%"}}
+        />
 
-                            <TableRow>
-                                <TableCell>
-                                    Volantini
-                                </TableCell>
-                                <TableCell align="right">
-                                    <select name="n_volantini" placeholder="Selezionare numero" checked={this.state.n_volantini}
-                                        onChange={this.handleInputChange}>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                    </select>
-                                </TableCell>
-                            </TableRow>
+        <TextField
+          fullWidth
+          type="date"
+          variant="outlined"
+          name="data"
+          label="Data"
+          value={this.state.data}
+          onChange={this.handleInputChange}
+          required
+          style={{width:"100%"}}
+          sx={{ m: 1 }}
+        />
 
-                            <TableRow>
-                                <TableCell>
-                                    Video mostrati
-                                </TableCell>
-                                <TableCell align="right">
-                                    <select name="n_video" placeholder="Selezionare numero" checked={this.state.n_video}
-                                        onChange={this.handleInputChange}>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                    </select>
-                                </TableCell>
-                            </TableRow>
-
-                            <TableRow>
-                                <TableCell colSpan="2">
-                                    <input type="text" name="note_lingue" id="note_lingue"  required placeholder="  Scrivere qui le pubblicazioni date in lingua e la lingua"></input>
-                                </TableCell>
-                                
-                            </TableRow>
-
-                            <TableRow>
-                                <TableCell>
-                                    <b>Data:</b>
-                                </TableCell>
-                                <TableCell align='right'>
-                                    <input type="date" name="data" required checked={this.state.data}
-                                    onChange={this.handleInputChange}></input>
-                                </TableCell>
-                            </TableRow>
-
-                            <TableRow>
-                                <TableCell><input type="submit" name="submit" value="Invia"></input></TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </TableContainer>               
-            </form>
-        </div>
-      );
-    }
+        <Button variant="contained" color="primary" type="submit" style={{width:"100%"}} sx={{ m: 1 }}>
+          Invia
+        </Button>
+      </Box>
+    );
   }
+}
 
-export {Contattaci};
+export { Contattaci };
