@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Esposizioni from './components/Esposizioni';
+import FullScreenImageWithLoader from './components/Loader';
+
 
 
 
@@ -32,7 +34,7 @@ function App() {
               </nav>
               <Routes>
                 <Route path="/" element={<TabellaVirtuale />} ></Route>
-                <Route path="/esposizioni" element={<Esposizioni />}/>
+                <Route path="/esposizioni" element={<FullScreenImageWithLoader />}/>
               </Routes>
             </BrowserRouter>
         </div>

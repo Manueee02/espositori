@@ -15,12 +15,22 @@ import { ref, get } from "firebase/database";
 import { db } from "./firebase";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import FullScreenImageWithLoader from './Loader';
 
 function TabellaVirtuale() {
   const [turni, setTurni] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const query = ref(db, "Turni");
@@ -65,7 +75,7 @@ function TabellaVirtuale() {
       <>
         {parts.map((part, index) =>
           regex.test(part) ? (
-            <span key={index} style={{ backgroundColor: 'yellow'}}>{part}</span>
+            <span key={index} style={{ backgroundColor: 'yellow' }}>{part}</span>
           ) : (
             part
           )
@@ -89,11 +99,15 @@ function TabellaVirtuale() {
     setOpenDialog(false);
   };
 
+  if (showLoader) {
+    return <FullScreenImageWithLoader />;
+  }
+
   return (
     <div>
       <Paper
         component="form"
-        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center',  margin: '0 auto', marginBottom: '20px' }}
+        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', margin: '0 auto', marginBottom: '20px' }}
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}
@@ -161,9 +175,9 @@ function TabellaVirtuale() {
       </Fab>
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <div>
-          <ToastContainer handleCloseDialog={handleCloseDialog}/>
+          <ToastContainer handleCloseDialog={handleCloseDialog} />
           <Contattaci />
-      </div>
+        </div>
       </Dialog>
     </div>
   );

@@ -28,6 +28,68 @@ p{
   margin-left: 0.4rem;
 }
 
+/* Imposta lo stile del contenitore fullscreen */
+/* Imposta lo stile del contenitore fullscreen */
+.fullscreen-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black; /* Puoi cambiare il colore di sfondo se necessario */
+  z-index: 9999;
+}
+
+/* Imposta lo stile dell'immagine fullscreen */
+.fullscreen-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /*image-rendering: -webkit-optimize-contrast; /* Migliora la qualità su WebKit */
+ /* image-rendering: crisp-edges; /* Prova 'pixelated' o 'high-quality' per diversi risultati */
+}
+
+/* Stile per il loader */
+.loader {
+  position: absolute;
+  bottom: 20px; /* Sposta il loader verso il basso */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Stile per le palline */
+.dot {
+  width: 15px; /* Aumenta la larghezza delle palline */
+  height: 15px; /* Aumenta l'altezza delle palline */
+  margin: 0 10px; /* Aumenta lo spazio tra le palline */
+  background-color: white; /* Colore delle palline */
+  border-radius: 50%;
+  animation: bounce 0.6s infinite alternate;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5); /* Ombra interna */
+}
+
+/* Animazione per le palline */
+@keyframes bounce {
+  to {
+    transform: translateY(-170%); /* Aumenta l'altezza dello spostamento */
+  }
+}
+
+/* Delay per le palline */
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+
 /*
 select {
   background-color: rgb(190, 190, 190);
