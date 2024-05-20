@@ -52,6 +52,20 @@ p{
   /*image-rendering: -webkit-optimize-contrast; /* Migliora la qualità su WebKit */
  /* image-rendering: crisp-edges; /* Prova 'pixelated' o 'high-quality' per diversi risultati */
 }
+/*rgba(22, 22, 22, 0.37)*/
+#loader_box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(22, 22, 22, 0.37);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Assicurati che sia sopra altri elementi */
+}
+
 
 /* Stile per il loader */
 .loader {

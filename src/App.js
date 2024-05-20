@@ -23,18 +23,9 @@ function App() {
             <link href='https://unpkg.com/css.gg@2.0.0/icons/css/browse.css' rel='stylesheet'/>
             <link href='https://unpkg.com/css.gg@2.0.0/icons/css/add-r.css' rel='stylesheet'/>
             <BrowserRouter>
-              <nav>
-
-                <div class="topnav">
-                  <Link to="/"><button><i class="gg-notes"></i></button></Link>
-                  <Link to="/form"><button><label className="submenu" id="label1" style={{marginLeft:"2rem", marginTop:"0.2rem"}}><b>Inserire Pubblicazioni</b></label> <i class="gg-add-r"></i></button></Link>
-                  <Link to="/esposizioni"><button><i class="gg-browse"></i></button></Link>
-
-                </div>
-              </nav>
               <Routes>
                 <Route path="/" element={<TabellaVirtuale />} ></Route>
-                <Route path="/esposizioni" element={<FullScreenImageWithLoader />}/>
+                <Route path="/esposizioni" element={<Esposizioni />}/>
               </Routes>
             </BrowserRouter>
         </div>

@@ -15,6 +15,11 @@ import { ref, get } from "firebase/database";
 import { db } from "./firebase";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
+
 import FullScreenImageWithLoader from './Loader';
 
 function TabellaVirtuale() {
@@ -23,11 +28,12 @@ function TabellaVirtuale() {
   const [searchTerm, setSearchTerm] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
+  const [showDiv, setShowDiv] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoader(false);
-    }, 4000);
+    }, 3500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -61,6 +67,18 @@ function TabellaVirtuale() {
     getData();
   }, []);
 
+  useEffect(() => {
+    let timer;
+    if (showDiv) {
+      timer = setTimeout(() => {
+        setShowDiv(false);
+      }, 5000); // 7000 millisecondi = 7 secondi
+    }
+
+    // Pulisce il timeout quando il componente si smonta o quando `showDiv` cambia
+    return () => clearTimeout(timer);
+  }, [showDiv]);
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -75,7 +93,7 @@ function TabellaVirtuale() {
       <>
         {parts.map((part, index) =>
           regex.test(part) ? (
-            <span key={index} style={{ backgroundColor: 'yellow' }}>{part}</span>
+            <span key={index} style={{ backgroundColor: '#4c94e6', fontWeight: 'bold', }}>{part}</span>
           ) : (
             part
           )
@@ -103,8 +121,18 @@ function TabellaVirtuale() {
     return <FullScreenImageWithLoader />;
   }
 
+  
+
   return (
     <div>
+      {showDiv && (
+        <div id='loader_box'>
+          <Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+          </Box>
+        </div>
+      )}
+
       <Paper
         component="form"
         sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', margin: '0 auto', marginBottom: '20px' }}
@@ -163,6 +191,20 @@ function TabellaVirtuale() {
       </TableContainer>
       <Fab
         color="primary"
+        aria-label="Esposizioni"
+        sx={{
+          position: 'fixed',
+          bottom: 80,
+          right: 16,
+        }}
+      >
+        <Link to="/esposizioni">
+          <LibraryBooksIcon sx={{ color: 'white' }}/>
+        </Link>
+        
+      </Fab>
+      <Fab
+        color="primary"
         aria-label="add"
         sx={{
           position: 'fixed',
@@ -171,7 +213,9 @@ function TabellaVirtuale() {
         }}
         onClick={handleOpenDialog}
       >
-        <AddIcon />
+        <AddIcon sx={{ color: 'white' }}/>
+ 
+        
       </Fab>
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <div>
