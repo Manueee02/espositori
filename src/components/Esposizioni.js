@@ -7,8 +7,8 @@ import HomeIcon from '@mui/icons-material/Home';
 
 
 import img1 from './img/1.jpg';
-import img2 from './img/IMG_2721.jpg';
-import img3 from './img/IMG_2734.jpg';
+import img2 from './img/IMG_2996.jpg';
+import img3 from './img/IMG_2994.jpg';
 
 const Esposizioni = () => {
   return (
@@ -39,16 +39,16 @@ const Esposizioni = () => {
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
-              <Typography variant="h4">Espositore 2 "<i>Un mondo nel caos, proteggi ciò che conta</i>"</Typography>
+              <Typography variant="h4">Espositore 2 "<i>Alla ricerca della verita'</i>"</Typography>
               <List>
                 <ListItem>
-                  <ListItemText primary="1° Ripiano: Italiano / Inglese (e)" />
+                  <ListItemText primary="1° Ripiano: Italiano / Hindi (h)" />
                 </ListItem>
                 <ListItem>
-                  <ListItemText primary="2° Ripiano: Bengali + Singalese / Spagnolo (s)" />
+                  <ListItemText primary="2° Ripiano: Singalese + Inglese / Arabo" />
                 </ListItem>
                 <ListItem>
-                  <ListItemText primary="3° Ripiano: Rumeno (m) + Hindi / Ucraino" />
+                  <ListItemText primary="3° Ripiano: Spagnolo + Francese/ Rumeno (m) + Ucraino" />
                 </ListItem>
               </List>
               <img src={img2} style={{ borderRadius: '1rem', maxWidth: '100%' }} />
@@ -56,20 +56,20 @@ const Esposizioni = () => {
           </Card>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Typography variant="h5">Espositore singolo, per turni giovedì 15:30-18:30 e Sabato 9-12 (Palocco)</Typography>
+          <Typography variant="h5">Espositore singolo, per turni giovedì pomeriggio e Sabato mattina (Palocco)</Typography>
           <br></br><Card>
             <CardContent>
               
-              <Typography variant="h4">Espositore 1 "<i>Alla ricerca della verita'</i>"</Typography>
+              <Typography variant="h4">Espositore 1 "<i>Un mondo nel caos, proteggi ciò che conta </i>"</Typography>
               <List>
                 <ListItem>
                   <ListItemText primary="1° Ripiano: Puoi vivere felice per sempre: Tagalog + Hindi / Italiano + Spagnolo" />
                 </ListItem>
                 <ListItem>
-                  <ListItemText primary="2° Ripiano: Svegliatevi: Singalese / Italiano" />
+                  <ListItemText primary="2° Ripiano: Svegliatevi: Italiano / Inglese + Spagnolo" />
                 </ListItem>
                 <ListItem>
-                  <ListItemText primary="3° Ripiano: Arabo + Inglese /Romeno" />
+                  <ListItemText primary="3° Ripiano: Singalese + Rumeno / Ucraino" />
                 </ListItem>
               </List>
               <img src={img3} style={{ borderRadius: '1rem', maxWidth: '100%' }} />
